@@ -1,4 +1,4 @@
-import { browser, $, expect } from "@wdio/globals"
+import { expect } from "@wdio/globals"
 import LoginPage from "../pageobjects/loginpage"
 import productpage from "../pageobjects/productpage"
 
@@ -34,4 +34,5 @@ describe("LOGIN DENGAN VALID", () => {
         await LoginPage.login("standards", "saucedemo")
         await expect(LoginPage.alert_message).toHaveText('Epic sadface: Username and password do not match any user in this service')
     })
+
 })

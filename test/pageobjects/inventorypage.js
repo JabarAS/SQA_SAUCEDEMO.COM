@@ -1,5 +1,4 @@
-import { $, browser } from "@wdio/globals"
-import loginpage from "./loginpage"
+import { $ } from "@wdio/globals"
 
 class Inventory {
     get item() { return $('div[data-test="inventory-item-name"]') }

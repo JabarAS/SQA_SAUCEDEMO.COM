@@ -1,4 +1,4 @@
-import { browser, $, expect } from "@wdio/globals"
+import { expect, browser } from "@wdio/globals"
 import productpage from '../pageobjects/productpage'
 import loginpage from '../pageobjects/loginpage'
 import inventorypage from "../pageobjects/inventorypage"
@@ -31,8 +31,5 @@ describe("halaman produk", () => {
     it('Masuk Side Bar', async function() {
         await productpage.side_bar.click()
         await expect(sidebarpage.sidebar_page).toExist()
-    })
-    it('Filter Item', async function() {
-
     })
 })

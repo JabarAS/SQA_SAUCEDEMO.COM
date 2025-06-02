@@ -1,5 +1,4 @@
-import { browser } from "@wdio/globals"
-import { Key } from "webdriverio"
+import { browser, $ } from "@wdio/globals"
 
 class LoginPage {
     get username() { return $("#user-name") }

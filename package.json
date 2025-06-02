@@ -10,6 +10,7 @@
     "scripts": {
         "wdio": "wdio run ./wdio.conf.js",
         "wdio:test1": "wdio run ./wdio.conf.js --spec ./test/specs/login.specs.js",
-        "wdio:test2": "wdio run ./wdio.conf.js --spec ./test/specs/product.specs.js"
+        "wdio:test2": "wdio run ./wdio.conf.js --spec ./test/specs/product.specs.js",
+        "wdio:test3": "wdio run ./wdio.conf.js --spec ./test/specs/pro.specs.js"
     }
 }
