@@ -1,4 +1,4 @@
-import { browser, $, expect } from "@wdio/globals"
+import { $, expect } from "@wdio/globals"
 import loginpage from '../pageobjects/loginpage'
 
 
