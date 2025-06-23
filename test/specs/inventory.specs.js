@@ -4,7 +4,7 @@ import inventorypage from '../pageobjects/inventorypage'
 import productpage from '../pageobjects/productpage'
 
 describe('Cek Inventory', () => {
-    it.only("Add to cart", async() => {
+    it("Add to cart", async() => {
         await loginpage.open()
         await loginpage.login("standard_user", "secret_sauce")
         await productpage.deskrip_backpack.click()
