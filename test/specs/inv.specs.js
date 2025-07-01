@@ -49,4 +49,28 @@ describe('cek inventory', () => {
         // Validasi nama produk tidak kosong (bisa ditambah validasi lain sesuai kebutuhan)
         expect(nameText).not.toBe('');
     });
+
+
+    it('Add to cart produk random', async() => {
+        await loginpage.open();
+        await loginpage.login("standard_user", "secret_sauce");
+
+        // Ambil semua produk
+        const inventoryItems = await $$('.inventory_item');
+        const randomIndex = Math.floor(Math.random() * inventoryItems.length);
+        const randomItem = inventoryItems[randomIndex];
+
+        // Masuk ke detail produk
+        const link = await randomItem.$('a[id*="_img_link"]') || await randomItem.$('a[id*="_title_link"]');
+        await link.click();
+
+        // Klik tombol Add to Cart
+        const addToCartBtn = await $('#add-to-cart');
+        await addToCartBtn.click();
+
+        const badgeText = await productpage.cartBadge.getText();
+        await expect(badgeText).toBe('1');
+
+    });
+
 });

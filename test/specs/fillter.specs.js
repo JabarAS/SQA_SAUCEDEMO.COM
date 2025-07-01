@@ -31,9 +31,9 @@ describe('filter PRODUCT', () => {
         await $('select[data-test="product-sort-container"]')
             .selectByAttribute('value', 'za');
 
-        await browser.pause(5000); // tunggu sorting
+        await browser.pause(5000);
 
-        const items = await $$('div.inventory_item_name'); // Sesuaikan jika perlu
+        const items = await $$('div.inventory_item_name');
 
         const names = [];
         for (let item of items) {
@@ -43,7 +43,7 @@ describe('filter PRODUCT', () => {
         for (let i = 0; i < names.length - 1; i++) {
             expect(names[i].toLowerCase() >= names[i + 1].toLowerCase()).toBe(true);
         }
-        browser.pause(5000); // Tunggu 2 detik untuk melihat hasil
+        browser.pause(5000);
     });
     it('produk harus urut dari harga termurah ke termahal', async() => {
         await loginpage.open()

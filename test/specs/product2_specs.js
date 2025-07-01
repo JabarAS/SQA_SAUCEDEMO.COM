@@ -20,6 +20,6 @@ describe('Add 3 random items to cart', () => {
 
         const cartBadge = await $('.shopping_cart_badge');
         await cartBadge.waitForDisplayed({ timeout: 5000 });
-        await expect(await cartBadge.getText()).toBe('3');
+        await expect(cartBadge.getText()).toBe('3');
     });
 });
