@@ -1,90 +1,44 @@
 import { $, $$, expect, browser } from "@wdio/globals";
 import loginpage from "../pageobjects/loginpage";
+import productpage from "../pageobjects/productpage";
 
 describe('filter PRODUCT', () => {
-    it('Sort products by Name A to Z', async() => {
+    beforeEach(async() => {
+        await browser.reloadSession()
         await loginpage.open()
         await loginpage.login("standard_user", "secret_sauce")
 
-
-        await $('select[data-test="product-sort-container"]')
-            .selectByAttribute('value', 'az');
-
-        await browser.pause(1000); // tunggu efek sorting
-
-        const items = await $$('div.inventory_item_name'); // Pastikan selector benar
-
-        const names = [];
-        for (let item of items) {
-            names.push(await item.getText());
-        }
+    })
+    it('Sort products by Name A to Z', async() => {
+        await productpage.sortBy('az');
+        const names = await productpage.getProductNames();
 
         for (let i = 0; i < names.length - 1; i++) {
             expect(names[i].toLowerCase() <= names[i + 1].toLowerCase()).toBe(true);
         }
-        browser.pause(2000); // Tunggu 2 detik untuk melihat hasil
     });
-    it('produk harus urut alfabetis dari Z ke A', async() => {
-        await loginpage.open()
-        await loginpage.login("standard_user", "secret_sauce")
 
-        await $('select[data-test="product-sort-container"]')
-            .selectByAttribute('value', 'za');
-
-        await browser.pause(5000);
-
-        const items = await $$('div.inventory_item_name');
-
-        const names = [];
-        for (let item of items) {
-            names.push(await item.getText());
-        }
+    it('Sort products by Name Z to A', async() => {
+        await productpage.sortBy('za');
+        const names = await productpage.getProductNames();
 
         for (let i = 0; i < names.length - 1; i++) {
             expect(names[i].toLowerCase() >= names[i + 1].toLowerCase()).toBe(true);
         }
-        browser.pause(5000);
     });
-    it('produk harus urut dari harga termurah ke termahal', async() => {
-        await loginpage.open()
-        await loginpage.login("standard_user", "secret_sauce")
 
-        await $('select[data-test="product-sort-container"]')
-            .selectByAttribute('value', 'lohi'); // value untuk "low to high"
-
-        await browser.pause(4000); // tunggu efek sorting
-
-        const items = await $$('div.inventory_item_price'); // Pastikan selector ini sesuai
-
-        const prices = [];
-        for (let item of items) {
-            const text = await item.getText(); // Contoh: "$29.99"
-            const num = parseFloat(text.replace('$', '')); // Ambil angka saja
-            prices.push(num);
-        }
+    it('Sort products by Price low to high', async() => {
+        await productpage.sortBy('lohi');
+        const prices = await productpage.getProductPrices();
 
         for (let i = 0; i < prices.length - 1; i++) {
             expect(prices[i] <= prices[i + 1]).toBe(true);
         }
     });
 
-    it('produk harus urut dari harga termahal ke termurah', async() => {
-        await loginpage.open()
-        await loginpage.login("standard_user", "secret_sauce")
-
-        await $('select[data-test="product-sort-container"]')
-            .selectByAttribute('value', 'hilo'); // value untuk "high to low"
-
-        await browser.pause(1000); // tunggu efek sorting
-
-        const items = await $$('div.inventory_item_price'); // Pastikan selector ini sesuai
-
-        const prices = [];
-        for (let item of items) {
-            const text = await item.getText(); // Contoh: "$49.99"
-            const num = parseFloat(text.replace('$', '')); // Ambil angka
-            prices.push(num);
-        }
+    it('Sort products by Price high to low', async() => {
+        await productpage.sortBy('hilo');
+        const prices = await productpage.getProductPrices();
 
         for (let i = 0; i < prices.length - 1; i++) {
             expect(prices[i] >= prices[i + 1]).toBe(true);
